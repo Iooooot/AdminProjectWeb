@@ -218,7 +218,6 @@ export default {
     },
     next() {
       if (this.active < 3) {
-
         this.$refs['findPwdFormS' + (this.active + 1)].validate(valid => {
           // 判断校验是否通过
           if (!valid) return
