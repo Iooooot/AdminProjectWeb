@@ -45,7 +45,6 @@ export function verifyEmail(data) {
   })
 }
 
-
 export function resetPwd(data) {
   return request({
     url: '/user/resetPwd',

@@ -9,10 +9,10 @@ import '@/styles/index.scss' // global css
 
 import App from './App'
 import store from './store'
-import router from './router'
+import router from './router/routers'
 
 import '@/icons' // icon
-import '@/permission'
+import '@/router'
 import { mockXHR } from '../mock' // permission control
 
 /**
