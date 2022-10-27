@@ -3,17 +3,24 @@
     <transition name="sidebarLogoFade">
       <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
         <img v-if="logo" :src="logo" class="sidebar-logo">
-        <h1 v-else class="sidebar-title">{{ title }} </h1>
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo">
-        <h1 class="sidebar-title">{{ title }} </h1>
+        <!--<h1 class="">{{ title }} </h1>-->
+        <div class="user_profle_side">
+          <div class="user_img"><img class="img-responsive" :src="avatar" alt="#" /></div>
+          <div class="user_info sidebar-title">
+            <h6>{{name}}</h6>
+            <p><span class="online_animation"></span> Online</p>
+          </div>
+        </div>
       </router-link>
     </transition>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'SidebarLogo',
   props: {
@@ -24,9 +31,14 @@ export default {
   },
   data() {
     return {
-      title: 'Vue Admin Template',
-      logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+      logo: require('@/assets/images/logo04.png')
     }
+  },
+  computed: {
+    ...mapGetters([
+      'name',
+      'avatar'
+    ])
   }
 }
 </script>
@@ -44,9 +56,9 @@ export default {
 .sidebar-logo-container {
   position: relative;
   width: 100%;
-  height: 50px;
-  line-height: 50px;
-  background: #2b2f3a;
+  height: 80px;
+  line-height: 100px;
+  background: #304156;
   text-align: center;
   overflow: hidden;
 
@@ -59,6 +71,7 @@ export default {
       height: 32px;
       vertical-align: middle;
       margin-right: 12px;
+      margin-bottom: 10px;
     }
 
     & .sidebar-title {
@@ -67,9 +80,76 @@ export default {
       color: #fff;
       font-weight: 600;
       line-height: 50px;
-      font-size: 14px;
+      font-size: 15px;
       font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
       vertical-align: middle;
+    }
+
+    .user_profle_side {
+      display: flex;
+      margin-left: 10px;
+      padding-top: 8px;
+      height: 100%;
+    }
+
+    .user_img img {
+      width: 64px;
+      height: 64px;
+      border-radius: 100% 100%;
+    }
+
+    .user_info {
+      width: 80px;
+      p {
+        font-size: 13px;
+        font-weight: 500;
+        color: #1ed085;
+        margin: 0;
+      }
+
+      h6 {
+        height: 20px;
+        margin: 0 -25px 5px -5px;
+        font-size: 17px;
+        font-weight: 500;
+        color: #fff;
+        letter-spacing: 0;
+      }
+
+      p{
+        color: #42b983;
+        .online_animation {
+          display: inline-block;
+          width: 12px;
+          height: 12px;
+          background: #42b983;
+          border-radius: 100%;
+          margin-top: 0;
+          position: relative;
+          top: 1px;
+          -webkit-animation: online 2s infinite;
+          animation: online 2s infinite
+        }
+
+        @-webkit-keyframes online {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes online {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+      }
+
     }
   }
 

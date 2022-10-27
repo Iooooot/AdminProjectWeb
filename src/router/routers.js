@@ -78,74 +78,26 @@ export const constantRoutes = [
     children: [
       {
         path: 'center',
-        component: (resolve) => require(['@/views/tree/index'], resolve),
+        component: (resolve) => require(['@/views/profile/index'], resolve),
         name: '个人中心',
         meta: { title: '个人中心' }
       }
     ]
   },
   {
-    path: '/example',
+    path: '/alipay',
     component: Layout,
-    redirect: '/example/tree',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    hidden: true,
+    redirect: 'noredirect',
     children: [
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        path: 'paying',
+        component: (resolve) => require(['@/views/tools/aliPay/paying'], resolve),
+        name: '支付页面',
+        meta: { title: '支付页面' }
       }
     ]
   }
-  //
-  // {
-  //   path: '/nested',
-  //   component: Layout,
-  //   redirect: '/nested/menu1',
-  //   name: 'Nested',
-  //   meta: {
-  //     title: 'Nested',
-  //     icon: 'nested'
-  //   },
-  //   children: [
-  //     {
-  //       path: 'menu1',
-  //       component: () => import('@/views/nested/menu1/index'), // Parent router-view
-  //       name: 'Menu1',
-  //       meta: { title: 'Menu1' },
-  //       children: [
-  //         {
-  //           path: 'menu1-1',
-  //           component: () => import('@/views/nested/menu1/menu1-1'),
-  //           name: 'Menu1-1',
-  //           meta: { title: 'Menu1-1' },
-  //           children: [
-  //             {
-  //               path: 'menu1-1-1',
-  //               component: () => import('@/views/nested/menu1/menu1-1/menu1-1-1'),
-  //               name: 'Menu1-1-1',
-  //               meta: { title: 'Menu1-1-1' }
-  //             }
-  //           ]
-  //         },
-  //         {
-  //           path: 'menu1-2',
-  //           component: () => import('@/views/nested/menu1/menu1-2'),
-  //           name: 'Menu1-2',
-  //           meta: { title: 'Menu1-2' }
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       path: 'menu2',
-  //       component: () => import('@/views/nested/menu2/index'),
-  //       name: 'Menu2',
-  //       meta: { title: 'menu2' }
-  //     }
-  //   ]
-  // },
 ]
 
 const createRouter = () => new Router({

@@ -44,12 +44,18 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   response => {
+    const { headers } = response
+    if (headers['content-disposition'] !== undefined) {
+      console.log(headers['content-disposition'].indexOf('attachment'))
+      if (headers['content-disposition'].indexOf('attachment') !== -1) {
+        return response
+      }
+    }
     const res = response.data
-
     // 如果不是200状态码，则打印错误信息
-    if (res.code !== 200) {
+    if ((res.code != null && res.code !== 200) || (res.status != null && res.status !== 200)) {
       Message({
-        message: res.message || 'Error',
+        message: res.message || '出现了错误..',
         type: 'error',
         duration: 5 * 1000
       })

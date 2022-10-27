@@ -52,3 +52,27 @@ export function resetPwd(data) {
     data
   })
 }
+
+export function getAllInfo() {
+  return request({
+    url: '/user/getAllInfo',
+    method: 'get'
+  })
+}
+
+export function editInfo(data) {
+  return request({
+    url: '/user/editBasicInfo',
+    method: 'post',
+    data
+  })
+}
+
+export function getRolesById(params) {
+  return request({
+    url: '/user/getRolesById',
+    method: 'get',
+    params
+  })
+}
+

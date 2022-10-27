@@ -1,10 +1,10 @@
-import { constantRouterMap } from '@/router/routers'
+import { constantRoutes } from '@/router/routers'
 import Layout from '@/layout/index'
 import ParentView from '@/components/ParentView'
 
 const permission = {
   state: {
-    routers: constantRouterMap,
+    routers: constantRoutes,
     addRouters: [],
     // 因为侧边栏路径问题，所以需要与routers分开
     sidebarRouters: []
@@ -12,10 +12,10 @@ const permission = {
   mutations: {
     SET_ROUTERS: (state, routers) => {
       state.addRouters = routers
-      state.routers = constantRouterMap.concat(routers)
+      state.routers = constantRoutes.concat(routers)
     },
     SET_SIDEBAR_ROUTERS: (state, routers) => {
-      state.sidebarRouters = constantRouterMap.concat(routers)
+      state.sidebarRouters = constantRoutes.concat(routers)
     }
   },
   actions: {
@@ -31,7 +31,6 @@ const permission = {
 export const filterAsyncRouter = (routers, lastRouter = false, type = false) => {
   // 遍历后台传来的路由字符串，转换为组件对象
   return routers.filter(router => {
-    // 如果是侧边导航栏需要重新处理路径
     if (type && router.children) {
       router.children = filterChildren(router.children)
     }
@@ -42,8 +41,10 @@ export const filterAsyncRouter = (routers, lastRouter = false, type = false) => 
       } else if (router.component === 'ParentView') {
         router.component = ParentView
       } else {
-        const component = router.component
-        router.component = loadView(component)
+        if (typeof router.component === 'string') {
+          const component = router.component
+          router.component = (resolve) => require([`@/views/${component}`], resolve)
+        }
       }
     }
     if (router.children != null && router.children && router.children.length) {
@@ -84,7 +85,7 @@ function filterChildren(childrenMap, lastRouter = false) {
 }
 
 export const loadView = (view) => {
-  return (resolve) => require([`@/views/${view}`], resolve)
+  console.log(view)
 }
 
 export default permission

@@ -25,6 +25,9 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
+  },
+  SET_ROLES: (state, roles) => {
+    state.roles = roles
   }
 }
 
@@ -57,10 +60,15 @@ const actions = {
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
-        const { nickName, avatar } = data
-
+        const { nickName, avatar, roles } = data
         commit('SET_NAME', nickName)
         commit('SET_AVATAR', avatar)
+        // 如果没有任何权限，则赋予一个默认的权限，避免请求死循环
+        if (roles.length === 0) {
+          commit('SET_ROLES', ['ROLE_SYSTEM_DEFAULT'])
+        } else {
+          commit('SET_ROLES', roles)
+        }
         resolve(data)
       }).catch(error => {
         reject(error)
