@@ -82,10 +82,10 @@
         </el-alert>
         <el-form ref="findPwdFormS3" :rules="findPwdRules" :model="findPwdFrom" label-width="140px" style="margin-top: 30px;width: 280px" size="small">
           <el-form-item label="新密码：" prop="pwd01">
-            <el-input v-model="findPwdFrom.pwd01"></el-input>
+            <el-input v-model="findPwdFrom.pwd01" type="password"></el-input>
           </el-form-item>
           <el-form-item label="再次输入新密码：" prop="pwd02">
-            <el-input v-model="findPwdFrom.pwd02"></el-input>
+            <el-input v-model="findPwdFrom.pwd02" type="password"></el-input>
           </el-form-item>
         </el-form>
       </div>

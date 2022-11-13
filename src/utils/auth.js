@@ -6,7 +6,6 @@ export function getToken() {
 }
 
 export function setToken(token, expires = null) {
-  console.log(expires)
   if (expires == null) {
     return Cookies.set(TokenKey, token)
   }

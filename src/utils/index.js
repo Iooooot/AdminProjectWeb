@@ -94,6 +94,17 @@ export function formatTime(time, option) {
   }
 }
 
+export function dateTimeToString(date) {
+  var y = date.getFullYear();
+  var M = date.getMonth() + 1;
+  var d = date.getDate();
+  var H = date.getHours();
+  var m = date.getMinutes();
+  var s = date.getSeconds();
+  return y + '-' + (M < 10 ? ('0' + M) : M) + '-' + (d < 10 ? ('0' + d) : d) + " " + (H < 10 ? ('0' + H) : H) + ":" + (m < 10 ? ('0' + m) : m) + ":" + (s < 10 ? ('0' + s) : s);
+}
+
+
 /**
  * @param {string} url
  * @returns {Object}
@@ -123,7 +134,8 @@ export function param2Obj(url) {
  */
 export function formatRouterTree(data) { // data 就是传过来的路由对象,如上图，在这里结构化
   //
-  const parents = data.filter(p => p.pid === 0) // 拿到所有的一级路由
+  debugger
+  const parents = data.filter(p => p.pid === undefined) // 拿到所有的一级路由
   const children = data.filter(c => c.pid !== 0) // 拿到非一级路由的所有路由
 
   dataToTree(parents, children) // 每次递归一下
@@ -148,21 +160,33 @@ export function formatRouterTree(data) { // data 就是传过来的路由对象,
 }
 
 /**
- * 生成动态路由
- * @param userRouters
- * @returns {*}
+ * 判断json是否为空
+ * @param json
+ * @returns {boolean}
  */
-function generateRouter (userRouters) { // 真正的路由
-  let newRouters = userRouters.map((r) => {
-    let routes = {
-      path: r.path,
-      name: r.name,
-      component: () => import(`@/views/${r.name}`)
+export function isEmpty(json) {
+  if (json) {
+    for (const key in json) {
+      return false
     }
-    if (r.children) { // 如果有子路由
-      routers.children = generateRouter(r.children);
-    }
-    return routes;
-  })
-  return newRouters; // 最终路由
+  }
+  return true
 }
+
+/**
+ * 格式化后端传
+ */
+export function formatEndDate(date) {
+  const times = date.substring(0, 19).split('T')
+  return times[0] + ' ' + times[1]
+}
+
+export function getParameter(name) {
+  var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
+  var r = location.href.substr(1).match(reg)
+  if (r != null) return (r[2]); return null
+}
+
+// export function getParameter(name) {
+//   return decodeURIComponent((new RegExp('[?|&]'+name+'='+'([^&;]+?)(&|#|;|$)').exec(location.href)||[,""])[1].replace(/\+/g,'%20'))||null;
+// }
