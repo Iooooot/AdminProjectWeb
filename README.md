@@ -19,8 +19,8 @@
 ```
 AdminProjectWeb
 ├── src -- 主要组件代码
-	├── api -- 后端接口请求配置
     ├── assets -- 静态资源
+    ├── api -- 后端接口请求配置
     ├── components -- 要用的小组件
     ├── icons -- 所有icons图标以及使用配置
     ├── layout -- 整体的路由页面布局
