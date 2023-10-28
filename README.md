@@ -2,7 +2,7 @@
 
 ## 项目介绍
 
-`AdminProjectWeb`是一套完善的后台管理系统前端vue项目，采用了  VueJS、Vue-router、Vuex、ElementUI、Axios、webpack等核心技术，具有完善的用户动态路由权限验证以及各种后管功能。
+`AdminProjectWeb`是一套完善的个人工作台前端vue项目，采用了  VueJS、Vue-router、Vuex、ElementUI、Axios、webpack等核心技术，具有完善的用户动态路由权限验证以及各种后管功能。
 
 其中包含了多种后管功能：
 
